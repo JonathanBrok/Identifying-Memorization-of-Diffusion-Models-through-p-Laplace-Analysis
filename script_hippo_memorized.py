@@ -79,9 +79,9 @@ def predict_noise_factory(timesteps, text_emb, unet, vae, scheduler):
 
 
 # -------------------------------------------------------------------------
-# 2) The function that DOES the random sampling and returns avg cos similarity
+# 2) The function that does rhe flux estimation
 # -------------------------------------------------------------------------
-def compute_avg_cosine_similarity_for_image(
+def compute_1laplace_flux_for_image(
     img_path,
     unet,
     vae,
@@ -262,7 +262,7 @@ def main():
     # Gather average cos similarity for memorized
     memorized_sims = []
     for path in mem_paths:
-        val = compute_avg_cosine_similarity_for_image(
+        val = compute_1laplace_flux_for_image(
             img_path=path,
             unet=unet, vae=vae, text_encoder=text_encoder,
             tokenizer=tokenizer, scheduler=scheduler,
@@ -270,12 +270,12 @@ def main():
             n_draws=n_draws,
             device=device
         )
-        memorized_sims.append(val)
+        memorized_sims.append(1 - 1 * val)  # flip for inner-pointing flux
 
     # Gather average cos similarity for non-memorized
     nonmemorized_sims = []
     for path in nonmem_paths:
-        val = compute_avg_cosine_similarity_for_image(
+        val = -1 * compute_avg_cosine_similarity_for_image(
             img_path=path,
             unet=unet, vae=vae, text_encoder=text_encoder,
             tokenizer=tokenizer, scheduler=scheduler,
@@ -283,7 +283,7 @@ def main():
             n_draws=n_draws,
             device=device
         )
-        nonmemorized_sims.append(val)
+        nonmemorized_sims.append(1 - 1 * val)  # flip for inner-pointing flux
 
     # Plot the final histogram
     plt.figure(figsize=(7,5))
@@ -291,8 +291,8 @@ def main():
         plt.hist(memorized_sims, alpha=0.5, bins=15, label="Memorized")
     if nonmemorized_sims:
         plt.hist(nonmemorized_sims, alpha=0.5, bins=15, label="Non-Memorized")
-    plt.title(f"Hippo: LDM-Style Cosine Similarity (avg of {n_draws} draws)")
-    plt.xlabel("Mean Cosine Similarity")
+    plt.title(f"Memorization as Local Maxima")
+    plt.xlabel("1-Laplace Inner-pointing Average Flux")
     plt.ylabel("Count")
     plt.legend()
     plt.tight_layout()
