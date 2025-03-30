@@ -296,7 +296,7 @@ def main():
     plt.ylabel("Count")
     plt.legend()
     plt.tight_layout()
-    plt.savefig("hippo_mem_vs_nonmem_ldm_similarity_hist.png")
+    plt.savefig("expr_hippo.png")
     plt.show()
 
 if __name__ == "__main__":
