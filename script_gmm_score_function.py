@@ -497,7 +497,7 @@ def main():
         ax_quiver_diff.set_ylabel("y")
 
         fig.tight_layout()
-        out_fig = "gmm_expr.png"
+        out_fig = "expr_gmm.png"
         plt.savefig(out_fig, dpi=150)
         print(f"\nSaved => {out_fig}\n")
 
