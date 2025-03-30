@@ -96,13 +96,8 @@ def compute_1laplace_flux_for_image(
     """
     1) Encodes the image -> latents (shape (1,4,64,64))
     2) Builds text_emb from the 'prompt'
-    3) For each of n_draws:
-       - Sample new noise
-       - Call predict_noise(...) on that noise
-       - Compute cosine similarity
-    4) Return the average similarity
-
-    We also do an optional p-laplace step (1-laplace).
+    3) For each of n_draws, estimate the flux
+       -Notice that for 1-Laplace the flux is like summing cosine similaities due to normalization of both outward poiting normal and the field
     """
     # A) Encode image => latents
     img = Image.open(img_path).convert("RGB")
@@ -270,12 +265,12 @@ def main():
             n_draws=n_draws,
             device=device
         )
-        memorized_sims.append(1 - 1 * val)  # flip for inner-pointing flux
+        memorized_sims.append(val)
 
     # Gather average cos similarity for non-memorized
     nonmemorized_sims = []
     for path in nonmem_paths:
-        val = -1 * compute_avg_cosine_similarity_for_image(
+        val = -1 * compute_1laplace_flux_for_image(
             img_path=path,
             unet=unet, vae=vae, text_encoder=text_encoder,
             tokenizer=tokenizer, scheduler=scheduler,
@@ -283,7 +278,7 @@ def main():
             n_draws=n_draws,
             device=device
         )
-        nonmemorized_sims.append(1 - 1 * val)  # flip for inner-pointing flux
+        nonmemorized_sims.append(val)
 
     # Plot the final histogram
     plt.figure(figsize=(7,5))
@@ -292,11 +287,11 @@ def main():
     if nonmemorized_sims:
         plt.hist(nonmemorized_sims, alpha=0.5, bins=15, label="Non-Memorized")
     plt.title(f"Memorization as Local Maxima")
-    plt.xlabel("1-Laplace Inner-pointing Average Flux")
+    plt.xlabel("1-Laplace Average Flux")
     plt.ylabel("Count")
     plt.legend()
     plt.tight_layout()
-    plt.savefig("expr_hippo.png")
+    plt.savefig("expr_hippo.png", dpi=200)
     plt.show()
 
 if __name__ == "__main__":
