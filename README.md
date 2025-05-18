@@ -1,5 +1,5 @@
 # Identifying Memorization of Diffusion Models through *p*-Laplace Analysis  
-Official implementation of Brokman et. al, SSVM 2025.
+Official implementation, to appear in the 10th International Conference on Scale Space and Variational Methods (SSVM 2025).
 
 ## Overview
 
