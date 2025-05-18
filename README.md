@@ -56,7 +56,7 @@ python script_hippo_memorized.py
 
 ## Citation
 
-If you find our or work helpful, please cite our paper (while we await SSVM publication, the reference below is applicable as well - where we include a similar 1-Laplace analysis):
+If you find our or work helpful, please cite our paper:
 
 ```
 @article{brokman2025identifying,
