@@ -38,8 +38,6 @@ command:
 python script_gmm_score_function.py
 ```
 
-*(Insert figure or result PNG here)*
-
 ---
 
 ### 2. Real Images with Stable Diffusion 1.4
@@ -53,8 +51,6 @@ command:
 python stable_diffusion_generate.py
 python script_hippo_memorized.py
 ```
-
-*(Insert figure or result PNG here)*
 
 ---
 
