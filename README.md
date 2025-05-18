@@ -59,12 +59,10 @@ python script_hippo_memorized.py
 If you find our or work helpful, please cite our paper (while we await SSVM publication, the reference below is applicable as well - where we include a similar 1-Laplace analysis):
 
 ```
-@inproceedings{
-brokman2025manifold,
-title={Manifold Induced Biases for Zero-shot and Few-shot Detection of Generated Images},
-author={Jonathan Brokman and Amit Giloni and Omer Hofman and Roman Vainshtein and Hisashi Kojima and Guy Gilboa},
-booktitle={The Thirteenth International Conference on Learning Representations},
-year={2025},
-url={https://openreview.net/forum?id=7gGl6HB5Zd}
+@article{brokman2025identifying,
+  title={Identifying Memorization of Diffusion Models through p-Laplace Analysis},
+  author={Brokman, Jonathan and Giloni, Amit and Hofman, Omer and Vainshtein, Roman and Kojima, Hisashi and Gilboa, Guy},
+  journal={arXiv preprint, accepted for the 10th International Conference on Scale Space and Variational Methods in Computer Vision. arXiv:2505.08246},
+  year={2025}
 }
 ```
