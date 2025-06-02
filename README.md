@@ -59,10 +59,12 @@ python script_hippo_memorized.py
 If you find our or work helpful, please cite our paper:
 
 ```
-@article{brokman2025identifying,
+@inproceedings{brokman2025identifying,
   title={Identifying Memorization of Diffusion Models through p-Laplace Analysis},
   author={Brokman, Jonathan and Giloni, Amit and Hofman, Omer and Vainshtein, Roman and Kojima, Hisashi and Gilboa, Guy},
-  journal={arXiv preprint, accepted for the 10th International Conference on Scale Space and Variational Methods in Computer Vision. arXiv:2505.08246},
-  year={2025}
+  booktitle={International Conference on Scale Space and Variational Methods in Computer Vision},
+  pages={295--307},
+  year={2025},
+  organization={Springer}
 }
 ```
